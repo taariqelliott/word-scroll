@@ -31,7 +31,8 @@ const wordsArray = [
   "home",
   "love",
   "june",
-  "fidelity"
+  "fidelity",
+  "shoe"
 ];
 
 export default wordsArray;
