@@ -1,5 +1,6 @@
 import { useState } from "react";
 import wordsArray from "./components/wordsArray";
+import "./App.css"
 
 export default function App() {
     const [word, setWord] = useState(0);
