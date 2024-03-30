@@ -14,19 +14,16 @@ export default function App() {
         return wordsArray[Math.floor(Math.random() * wordsArray.length)];
     };
     const [word, setWord] = useState(getRandomWord());
-    // const wordToremove = word
 
     const removeWord = () => {
-        console.log(`word we removed is ${word.toUpperCase()}`);
+        console.log("word we removed is", word.toUpperCase());
         const removedWordIndex = wordsArray.indexOf(word)
         wordsArray.splice(removedWordIndex, 1)
         if (wordsArray.length === 0) {
             setGameOver(true)
         }
-        console.log(`The wordsArray length is now ${wordsArray.length === 1 ? "1 word long" : `${wordsArray.length} words long`}`);
+        console.log(`The wordsArray length is now ${wordsArray.length === 1 ? "1 word long." : `${wordsArray.length} words long.`}`);
     }
-
-
 
     // Function to change the displayed word
     function changeWord() {
@@ -36,7 +33,6 @@ export default function App() {
 
     // Function to handle form submission
     function handleSubmit(e) {
-        // removeWord()
         e.preventDefault(); // Prevent the default form submission behavior
         // Check if the typed word matches the displayed word
         if (inputValue.toLowerCase() === word) {
@@ -47,8 +43,6 @@ export default function App() {
             setCorrectWords(correctWords - 1); // Decrease correct count if wrong
             setInputValue(""); // Clear the input value
         }
-
-
     }
 
     // Function to handle input value change
@@ -60,11 +54,11 @@ export default function App() {
     return (
         <div>
             <div className="gameDiv">
-                <h1 className="speedTitle">SPEED TYPER</h1>
+                <h1 className="speedTitle">SPEEDTYPER</h1>
                 {gameOver ? (
                     <>
-                        <h1>Game Over</h1>
-                        <h2>You scored {correctWords == 1 ? "1 point" : correctWords + " points"}</h2>
+                        <h1 className="gameOver">Game Over</h1>
+                        <h2 className="scoredPoints">You scored {correctWords === 1 ? "1 point!" : <span className="points">{correctWords}</span>} points!</h2>
                     </>
                 ) : (
                     <>
