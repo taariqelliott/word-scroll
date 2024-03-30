@@ -20,6 +20,18 @@ const wordsArray = [
   "rabbit",
   "sun",
   "tree",
+  "music",
+  "socks",
+  "player",
+  "mousepad",
+  "camera",
+  "interface",
+  "moisture",
+  "crystal",
+  "home",
+  "love",
+  "june",
+  "fidelity"
 ];
 
 export default wordsArray;
