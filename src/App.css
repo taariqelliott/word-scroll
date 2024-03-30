@@ -1,6 +1,73 @@
-body{
-    background: rgb(247, 99, 123);
-    color: rgb(95, 100, 181);
+body {
+    background: #f7637b;
+    color: #5f64b5;
     text-align: center;
 
+}
+
+.gameDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.gameDiv>* {
+    margin: 4px;
+}
+
+.speedTitle {
+    font-family: 'Courier New', Courier, monospace;
+    background: black;
+    border: 2px solid;
+    padding: 6px;
+    border-radius: 15px;
+}
+
+.randomWord {
+    font-family: 'Courier New', Courier, monospace;
+    background: #5f64b5;
+    border: 2px solid;
+    padding: 6px;
+    border-radius: 15px;
+    animation: changeText 2s ;
+}
+
+.correctCount {
+    font-family: 'Courier New', Courier, monospace;
+    background: black;
+    border: 2px solid;
+    padding: 6px;
+    border-radius: 15px;
+}
+
+.changeButton {
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    background: black;
+    color: white;
+    font-size: larger;
+    border: 2px solid;
+    padding: 6px;
+    border-radius: 15px;
+}
+
+.changeButton:hover {
+    background: hsl(0, 0%, 30%);
+}
+
+.wordInput {
+    margin: 3px;
+}
+
+@keyframes changeText {
+    0% {
+        color: black;
+
+    }
+
+    100% {
+        color: #5f64b5;
+    }
 }

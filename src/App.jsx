@@ -1,62 +1,89 @@
 import { useState } from "react";
-import wordsArray from "./components/wordsArray";
-import "./App.css"
+import wordsArray from "./components/wordsArray"; // Import the array of words
+import "./App.css";
 
 export default function App() {
-    const [word, setWord] = useState(0);
-    const [correctWords, setCorrectWords] = useState(0)
-    const [inputValue, setInputValue] = useState(""); // State to track input value
-    const array = wordsArray;
+    // State variables to track correct words and input value
+    const [correctWords, setCorrectWords] = useState(0);
+    const [inputValue, setInputValue] = useState("");
+    const [gameOver, setGameOver] = useState(false);
 
+
+    // Function to get a random word from the wordsArray
+    const getRandomWord = () => {
+        return wordsArray[Math.floor(Math.random() * wordsArray.length)];
+    };
+    const [word, setWord] = useState(getRandomWord());
+    const wordToremove = word
+
+    const removeWord = () => {
+        const removedWordIndex = wordsArray.indexOf(wordToremove)
+        wordsArray.splice(removedWordIndex, 1)
+        if (wordsArray.length === 0) {
+            setGameOver(true)
+        }
+
+    }
+
+
+
+    // Function to change the displayed word
     function changeWord() {
-        setWord(word + 1);
-        if (word >= array.length - 1) {
-            setWord(0);
-        }
+        removeWord()
+        setWord(getRandomWord()); // Update the state with the new word
     }
-    //  TODO: 
-    //  ADD A WORD RANDOMIZER 
-    //  ALSO REMOVE THE WORD FROM ARRAY AFTER THE TRY TO TYPE IT SO GAME ACTUALLY ENDS
-    //  UI LIBRARY
+
+    // Function to handle form submission
     function handleSubmit(e) {
-        e.preventDefault();
-        console.log(inputValue); // Output the input value
-        // Here you can perform any further processing with the input value
-        // For example, you can update the state with it or perform some action.
-        if (inputValue.toLowerCase() === array[word]) {
-            setCorrectWords(correctWords + 1)
-            setWord((prevWord) => (prevWord + 1) % array.length); // Move to the next word
-            setInputValue("")
+        removeWord()
+        e.preventDefault(); // Prevent the default form submission behavior
+        // Check if the typed word matches the displayed word
+        if (inputValue.toLowerCase() === word) {
+            setCorrectWords(correctWords + 1); // Increment correct count if matched
+            changeWord(); // Change to a new random word
+            setInputValue(""); // Clear the input value
+        } else {
+            setCorrectWords(correctWords - 1); // Decrease correct count if wrong
+            setInputValue(""); // Clear the input value
         }
-        // THIS WILL ACTUALLY ALSO INCREMENT THE array[word] so they cant repeat it
 
-        else if (inputValue.toLowerCase() !== array[word]) {
-            setCorrectWords(correctWords - 1)
-            setInputValue("")
-        }
-        if (word >= array.length - 1) {
-            setWord(0);
-        }
     }
 
+    // Function to handle input value change
     function handleInputChange(e) {
         setInputValue(e.target.value); // Update input value state
     }
 
+    // Render the component
     return (
         <div>
-            <h1>SPEED TYPER</h1>
-            <div>
-                <h1>{array[word]}</h1>
-                <h2>Correct Words:{correctWords}</h2>
-                <button onClick={changeWord}>Change</button>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={handleInputChange} />
-                    <button type="submit">Submit</button>
-                </form>
+            <div className="gameDiv">
+                <h1 className="speedTitle">SPEED TYPER</h1>
+                {gameOver ? (
+                    <>
+                        <h1>Game Over</h1>
+                        <h2>You scored {correctWords == 1 ? "1 point" : correctWords + " points"}</h2>
+                    </>
+                ) : (
+                    <>
+                        <h1 key={word} className="randomWord">{word}</h1>
+
+                        <h2 className="correctCount">Correct Words: {correctWords}</h2>
+                        <button className="changeButton" onClick={changeWord}>Change</button>
+                        <form className="formDiv" onSubmit={handleSubmit}>
+                            <div className="formDiv">
+                                <input
+                                    className="wordInput"
+                                    type="text"
+                                    value={inputValue}
+                                    onChange={handleInputChange} />
+                                <button className="submitButton" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </>
+                )
+
+                }
             </div>
         </div>
     );

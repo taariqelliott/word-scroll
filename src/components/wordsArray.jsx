@@ -36,3 +36,6 @@ const wordsArray = [
 ];
 
 export default wordsArray;
+
+
+
