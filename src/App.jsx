@@ -14,15 +14,16 @@ export default function App() {
         return wordsArray[Math.floor(Math.random() * wordsArray.length)];
     };
     const [word, setWord] = useState(getRandomWord());
-    const wordToremove = word
+    // const wordToremove = word
 
     const removeWord = () => {
-        const removedWordIndex = wordsArray.indexOf(wordToremove)
+        console.log(`word we removed is ${word.toUpperCase()}`);
+        const removedWordIndex = wordsArray.indexOf(word)
         wordsArray.splice(removedWordIndex, 1)
         if (wordsArray.length === 0) {
             setGameOver(true)
         }
-
+        console.log(`The wordsArray length is now ${wordsArray.length === 1 ? "1 word long" : `${wordsArray.length} words long`}`);
     }
 
 
@@ -35,7 +36,7 @@ export default function App() {
 
     // Function to handle form submission
     function handleSubmit(e) {
-        removeWord()
+        // removeWord()
         e.preventDefault(); // Prevent the default form submission behavior
         // Check if the typed word matches the displayed word
         if (inputValue.toLowerCase() === word) {
@@ -46,6 +47,7 @@ export default function App() {
             setCorrectWords(correctWords - 1); // Decrease correct count if wrong
             setInputValue(""); // Clear the input value
         }
+
 
     }
 
