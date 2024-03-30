@@ -1,8 +1,8 @@
-### Speed Typer
+# Speed Typer
 
 ## To test typing speed
 
-# Things To Add
+### Things To Add
 
 1. Timer ()
 2. Scrolling Words
