@@ -78,7 +78,7 @@ export default function App() {
                                     value={inputValue}
                                     onChange={handleInputChange}
                                 />
-                                <button className="submitButton" type="submit">Submit</button>
+                                <button className="submitButton" type="submit" onSubmit={handleSubmit}>Submit</button>
                             </div>
                         </form>
                     </>
