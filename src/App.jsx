@@ -53,6 +53,10 @@ export default function App() {
         setInputValue(e.target.value); // Update the input value state
     }
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     // Render the component
     return (
         <div>
@@ -64,6 +68,7 @@ export default function App() {
                         <h2 className="scoredPoints">
                             You scored {correctWords === 1 ? "1 point!" : <span className="points">{correctWords}</span>} points!
                         </h2>
+                        <button onClick={refreshPage} className="changeButton">New Game</button>
                     </>
                 ) : (
                     <>
@@ -77,6 +82,7 @@ export default function App() {
                                     type="text"
                                     value={inputValue}
                                     onChange={handleInputChange}
+                                    autoFocus
                                 />
                                 <button className="submitButton" type="submit" onSubmit={handleSubmit}>Submit</button>
                             </div>
