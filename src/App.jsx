@@ -8,27 +8,30 @@ export default function App() {
     const [inputValue, setInputValue] = useState("");
     const [gameOver, setGameOver] = useState(false);
 
-
     // Function to get a random word from the wordsArray
     const getRandomWord = () => {
         return wordsArray[Math.floor(Math.random() * wordsArray.length)];
     };
     const [word, setWord] = useState(getRandomWord());
 
+    // Function to remove the current word from the wordsArray
     const removeWord = () => {
-        console.log("word we removed is", word.toUpperCase());
-        const removedWordIndex = wordsArray.indexOf(word)
-        wordsArray.splice(removedWordIndex, 1)
+        console.log("Word we removed is", word.toUpperCase());
+        const removedWordIndex = wordsArray.indexOf(word);
+        wordsArray.splice(removedWordIndex, 1);
         if (wordsArray.length === 0) {
-            setGameOver(true)
+            setGameOver(true);
         }
-        console.log(`The wordsArray length is now ${wordsArray.length === 1 ? "1 word long." : `${wordsArray.length} words long.`}`);
-    }
+        console.log(
+            `The wordsArray length is now ${wordsArray.length === 1 ? "1 word long." : `${wordsArray.length} words long.`
+            }`
+        );
+    };
 
     // Function to change the displayed word
     function changeWord() {
-        removeWord()
-        setWord(getRandomWord()); // Update the state with the new word
+        removeWord();
+        setWord(getRandomWord()); // Update the state with a new random word
     }
 
     // Function to handle form submission
@@ -47,7 +50,7 @@ export default function App() {
 
     // Function to handle input value change
     function handleInputChange(e) {
-        setInputValue(e.target.value); // Update input value state
+        setInputValue(e.target.value); // Update the input value state
     }
 
     // Render the component
@@ -58,12 +61,13 @@ export default function App() {
                 {gameOver ? (
                     <>
                         <h1 className="gameOver">Game Over</h1>
-                        <h2 className="scoredPoints">You scored {correctWords === 1 ? "1 point!" : <span className="points">{correctWords}</span>} points!</h2>
+                        <h2 className="scoredPoints">
+                            You scored {correctWords === 1 ? "1 point!" : <span className="points">{correctWords}</span>} points!
+                        </h2>
                     </>
                 ) : (
                     <>
                         <h1 key={word} className="randomWord">{word}</h1>
-
                         <h2 className="correctCount">Correct Words: {correctWords}</h2>
                         <button className="changeButton" onClick={changeWord}>Change</button>
                         <form className="formDiv" onSubmit={handleSubmit}>
@@ -72,14 +76,13 @@ export default function App() {
                                     className="wordInput"
                                     type="text"
                                     value={inputValue}
-                                    onChange={handleInputChange} />
+                                    onChange={handleInputChange}
+                                />
                                 <button className="submitButton" type="submit">Submit</button>
                             </div>
                         </form>
                     </>
-                )
-
-                }
+                )}
             </div>
         </div>
     );
