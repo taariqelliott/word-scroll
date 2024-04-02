@@ -35,7 +35,8 @@ body {
     border: 2px solid;
     padding: 6px;
     border-radius: 15px;
-    animation: changeText 0.1s ;
+    color: black;
+    /* animation: changeText 0.1s ; */
 }
 
 .correctCount {

@@ -1,20 +1,19 @@
 import { useState } from "react";
-import wordsArray from "./components/wordsArray"; // Import the array of words
+import wordsArray from "./components/wordsArray";
 import "./App.css";
 
 export default function App() {
-    // State variables to track correct words and input value
+
     const [correctWords, setCorrectWords] = useState(0);
     const [inputValue, setInputValue] = useState("");
     const [gameOver, setGameOver] = useState(false);
 
-    // Function to get a random word from the wordsArray
     const getRandomWord = () => {
         return wordsArray[Math.floor(Math.random() * wordsArray.length)];
     };
+
     const [word, setWord] = useState(getRandomWord());
 
-    // Function to remove the current word from the wordsArray
     const removeWord = () => {
         console.log("Word we removed is", word.toUpperCase());
         const removedWordIndex = wordsArray.indexOf(word);
@@ -28,36 +27,33 @@ export default function App() {
         );
     };
 
-    // Function to change the displayed word
     function changeWord() {
         removeWord();
-        setWord(getRandomWord()); // Update the state with a new random word
+        setWord(getRandomWord());
     }
 
-    // Function to handle form submission
     function handleSubmit(e) {
-        e.preventDefault(); // Prevent the default form submission behavior
-        // Check if the typed word matches the displayed word
+        e.preventDefault();
+
         if (inputValue.toLowerCase() === word) {
-            setCorrectWords(correctWords + 1); // Increment correct count if matched
-            changeWord(); // Change to a new random word
-            setInputValue(""); // Clear the input value
+            setCorrectWords(correctWords + 1);
+            changeWord();
+            setInputValue("");
         } else {
-            setCorrectWords(correctWords - 1); // Decrease correct count if wrong
-            setInputValue(""); // Clear the input value
+            setCorrectWords(correctWords - 1);
+            setInputValue("");
         }
     }
 
-    // Function to handle input value change
     function handleInputChange(e) {
-        setInputValue(e.target.value); // Update the input value state
+        setInputValue(e.target.value);
     }
 
     function refreshPage() {
         window.location.reload(false);
     }
 
-    // Render the component
+
     return (
         <div>
             <div className="gameDiv">
@@ -81,6 +77,7 @@ export default function App() {
                                     className="wordInput"
                                     type="text"
                                     value={inputValue}
+                                    placeholder={word}
                                     onChange={handleInputChange}
                                     autoFocus
                                 />
